@@ -6,10 +6,11 @@ import numpy as np
 from pystoi import stoi
 from scipy.io import wavfile
 from tqdm import tqdm
-
+from utils import get_filelist
 
 def calculate_stoi(ref_dir, deg_dir):
-    input_files = glob.glob(f"{deg_dir}/*.wav")
+    # input_files = glob.glob(f"{deg_dir}/*.wav")
+    input_files = get_filelist(deg_dir)
     if len(input_files) < 1:
         import pdb;pdb.set_trace()
         raise RuntimeError(f"Found no wavs in {ref_dir}")

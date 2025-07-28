@@ -5,7 +5,7 @@ run_evaluation() {
 
     echo "Processing folder: ${folder_path}"
 
-    echo "Compute MOS"
+    echo "Compute wer"
     python metrics/compute_wer.py -f ${folder_path}
 }
 

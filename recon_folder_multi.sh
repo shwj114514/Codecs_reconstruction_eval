@@ -35,6 +35,7 @@ run_model() {
 # run_model "DAC_16k" 2
 # run_model "DAC_24k" 1
 
+run_model "DAC_24k" 9
 
 # run_model "SpeachTokenzier" 1
 # run_model "SpeachTokenzier" 2
@@ -53,7 +54,7 @@ run_model() {
 
 # run_model "Xcodec" 1
 # run_model "Xcodec" 2
-run_model "SemanticCodec_700bps" 0
+# run_model "SemanticCodec_700bps" 0
 
 # run_model "Xcodec2" 0
 

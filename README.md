@@ -63,33 +63,50 @@ export PATH=$PATH:～/bin
 ```
 
 ## How to use
+### test inference
 first,you can run `python wrapper.py` to get the bitrate or latent dimension of the codec.
-
-During evaluation, each audio clip is then resampled to the codec’s sampling rate for reconstruction, and afterward resampled back to 16 kHz for storage and evaluation.
+### prepare audio
+Many works evaluate speech tokenizers on LibriSpeech/test-clean and we use this dataset as an example. First, download test-clean.tar.gz from https://www.openslr.org/12 and extract or move its contents to `exp_recon/test-clean/`.
 ```sh
 mkdir exp_recon
-mv path/to/LibriSpeech/test-clean exp_recon/test-clean
+mv path/to/LibriSpeech/test-clean exp_recon/test-clean_flac
+```
+and then convert the audio into WAV format.
+```sh
+python trans_folder_to_wav.py
+```
+
+
+We explicitly store the resampled 16 kHz audio for evaluation.
+```sh
 python resample_folder.py
 ```
+### reconstruct audio
+During evaluation, each audio clip is then resampled to the codec’s sampling rate for reconstruction, and afterward resampled back to 16 kHz for storage and evaluation. 
+Run `recon_folder.sh` (or `recon_folder_multi.sh` if you have multiple GPUs) to reconstruct the audio clips in exp_recon/test-clean using your codec.
 
-then reconstruct the audio of exp_recon/test-clean using your Codec
-
-```sh
-python recon_folder.py
+You will get a folder structure as shown below:
 ```
-
-or
-```sh
-bash recon_folder.sh
+exp_recon/
+├── DAC_24k_9         # Reconstructed audio using DAC (24kHz) model with 9 RVQ codebooks
+├── test-clean        # Original audio clips (original sampling rate)
+└── test-clean_16000  # Resampled original audio clips at 16 kHz
+└── test-clean_flac
 ```
-
+### run eval
 For pairwise metrics such as PESQ, STOI, and mel distance—where two audio folders must be compared—both folders should have the same sampling rate.
-
 ```sh
-run_pesq_stoi.sh
-run_wer.sh
+bash run_pesq_stoi.sh
+bash run_mel_stft.sh
 ```
-
+for other metric,run
+```sh
+bash run_usage.sh
+bash run_entropy.sh
+bash run_wer.sh
+bash run_umos.sh 
+bash run_spk.sh
+```
 
 ## Acknowledgements
 This toolkit reuses code cloned directly from the following projects to simplify setup: 

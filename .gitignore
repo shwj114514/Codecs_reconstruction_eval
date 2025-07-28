@@ -25,7 +25,13 @@ test_module/**/*.wav
 backup
 *tmp*
 
-exp**/**
+exp*/
+!exp_recon/
+exp_recon/*
+!exp_recon/DAC_24k_9/
+!exp_recon/test-clean/
+!exp_recon/test-clean_16000/
+!exp_recon/test-clean_flac/
 
 /*.txt
 !combined.txt

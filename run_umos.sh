@@ -10,9 +10,9 @@ run_evaluation() {
 }
 
 gen_dir_list=(
-    # "exp_recon/DAC_24k_9"
+    "exp_recon/DAC_24k_9"
     # "exp_recon/DAC_24k_0"
-    "exp_recon/Encodec_2"
+    # "exp_recon/Encodec_2"
     # "exp_recon/WavTokenizer_0"
     # "exp_recon/SpeachTokenzier_1"
     # "exp_recon/SpeachTokenzier_2"
